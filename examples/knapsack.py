@@ -26,7 +26,7 @@ class KnapsackProblem:
         mutator = mutation.ReverseSequenceMutation()
         # truncate selector for elitism
         truncate_selector = selection.TruncationSelector()
-        num_keep_elite = 4 
+        num_keep_elite = 4
         # Save history
         history = []
         for i in range(max_generation):
@@ -56,24 +56,24 @@ class KnapsackProblem:
         population.fitness = fitness
         return population
 
-    def optimal(self, wt, val, W, n): 
+    def optimal(self, wt, val, W, n):
         # Copied from GeeksForGeeks
-        # base conditions 
-        if n == 0 or W == 0: 
+        # base conditions
+        if n == 0 or W == 0:
             return 0
-        if self.t[n][W] != -1: 
-            return self.t[n][W] 
-    
-        # choice diagram code 
-        if wt[n-1] <= W: 
-            self.t[n][W] = max( 
-                val[n-1] + self.optimal( 
-                    wt, val, W-wt[n-1], n-1), 
-                self.optimal(wt, val, W, n-1)) 
-            return self.t[n][W] 
-        elif wt[n-1] > W: 
-            self.t[n][W] = self.optimal(wt, val, W, n-1) 
-            return self.t[n][W] 
+        if self.t[n][W] != -1:
+            return self.t[n][W]
+
+        # choice diagram code
+        if wt[n - 1] <= W:
+            self.t[n][W] = max(
+                val[n - 1] + self.optimal(wt, val, W - wt[n - 1], n - 1),
+                self.optimal(wt, val, W, n - 1),
+            )
+            return self.t[n][W]
+        elif wt[n - 1] > W:
+            self.t[n][W] = self.optimal(wt, val, W, n - 1)
+            return self.t[n][W]
 
 
 if __name__ == "__main__":
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     weight = list(knapsack_problem.weights.squeeze())
     W = knapsack_problem.max_weight
     n = len(profit)
-    knapsack_problem.t = [[-1 for i in range(W + 1)] for j in range(n + 1)] 
+    knapsack_problem.t = [[-1 for i in range(W + 1)] for j in range(n + 1)]
     optimal = knapsack_problem.optimal(weight, profit, W, n)
     print("optimal = ", optimal)
     if optimal == history[-1]:
