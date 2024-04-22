@@ -131,6 +131,7 @@ if __name__ == "__main__":
 
     # Create figure for two subplots
     fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+    fig.suptitle('Travelling salesman problem')
     axs.flatten()
     
     # Draw the genetic algorithm path
@@ -162,7 +163,6 @@ if __name__ == "__main__":
     axs[1].plot(plt_xs, plt_ys)
     axs[1].set_title(f"Number of cities = {num_cities}")
     # axs[1].imshow()
-
     plt.show()
 
 
