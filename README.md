@@ -1,2 +1,2 @@
 # Genetic Algorithms
-Implementation of genetic algorithms in python using numpy
+Implementation of genetic algorithms in python using numpy.
