@@ -56,8 +56,8 @@ class KnapsackProblem:
         population.fitness = fitness
         return population
 
-    def knapsack(self, wt, val, W, n): 
- 
+    def optimal(self, wt, val, W, n): 
+        # Copied from GeeksForGeeks
         # base conditions 
         if n == 0 or W == 0: 
             return 0
@@ -67,12 +67,12 @@ class KnapsackProblem:
         # choice diagram code 
         if wt[n-1] <= W: 
             self.t[n][W] = max( 
-                val[n-1] + self.knapsack( 
+                val[n-1] + self.optimal( 
                     wt, val, W-wt[n-1], n-1), 
-                self.knapsack(wt, val, W, n-1)) 
+                self.optimal(wt, val, W, n-1)) 
             return self.t[n][W] 
         elif wt[n-1] > W: 
-            self.t[n][W] = self.knapsack(wt, val, W, n-1) 
+            self.t[n][W] = self.optimal(wt, val, W, n-1) 
             return self.t[n][W] 
 
 
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     W = knapsack_problem.max_weight
     n = len(profit)
     knapsack_problem.t = [[-1 for i in range(W + 1)] for j in range(n + 1)] 
-    optimal = knapsack_problem.knapsack(weight, profit, W, n)
+    optimal = knapsack_problem.optimal(weight, profit, W, n)
     print("optimal = ", optimal)
     if optimal == history[-1]:
         print("Optimal found")
